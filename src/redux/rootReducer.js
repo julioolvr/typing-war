@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux'
 import { routerReducer as router } from 'react-router-redux'
-import counter from './modules/counter'
-import power from './modules/power'
+
+import ownPower from './modules/OwnPower'
+import enemyPower from './modules/EnemyPower'
 
 export default combineReducers({
-  counter,
   router,
-  ownPower: power,
-  enemyPower: power
+  ownPower,
+  enemyPower
 })

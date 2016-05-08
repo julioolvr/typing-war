@@ -7,6 +7,9 @@ import makeRoutes from './routes'
 import Root from './containers/Root'
 import configureStore from './redux/configureStore'
 
+import Timer from 'models/Timer'
+import { tick } from 'redux/modules/Tick'
+
 // Configure history for react-router
 const browserHistory = useRouterHistory(createBrowserHistory)({
   basename: __BASENAME__
@@ -26,6 +29,11 @@ const history = syncHistoryWithStore(browserHistory, store, {
 // the store to the route definitions so that routes have access to it for
 // hooks such as `onEnter`.
 const routes = makeRoutes(store)
+
+// Not sure if this is the best place to put this
+const timer = new Timer(() => store.dispatch(tick()))
+// TODO: What should be the time interval here? Should the browser define it?
+timer.start(1000)
 
 // Now that redux and react-router have been configured, we can render the
 // React application to the DOM!
